@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alan Pulval-Dady</title>
   <meta name="description" content="Academic homepage for Alan Pulval-Dady: research, publications, teaching, and contact information.">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <header class="site-header">
@@ -21,7 +21,7 @@
       <nav class="tabs" role="tablist" aria-label="Main sections">
         <button id="tab-about" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="about" data-tab="about">About</button>
         <button id="tab-publications" class="tab" type="button" role="tab" aria-selected="false" aria-controls="publications" data-tab="publications">Publications</button>
-         <button id="tab-seminar" class="tab" type="button" role="tab" aria-selected="false" aria-controls="seminar" data-tab="seminar">Seminar</button>
+        <button id="tab-seminar" class="tab" type="button" role="tab" aria-selected="false" aria-controls="seminar" data-tab="seminar">Seminar</button>
         <button id="tab-teaching" class="tab" type="button" role="tab" aria-selected="false" aria-controls="teaching" data-tab="teaching">Teaching</button>
         <button id="tab-contact" class="tab" type="button" role="tab" aria-selected="false" aria-controls="contact" data-tab="contact">Contact</button>
       </nav>
@@ -60,15 +60,7 @@
           <span>Recent updates</span>
         </div>
 
-        <ol class="news-list">
-          <li>
-            <time datetime="2025-10-08">Oct 08, 2025</time>
-            <p>
-              <a href="https://doi.org/10.62056/ahjbhee-3">Blind ECDSA from the ECDSA Assumption</a>
-              Published at CiC - Communications in Cryptology.
-            </p>
-          </li>
-        </ol>
+        <ol id="news-list" class="news-list"></ol>
       </section>
     </section>
 
@@ -77,22 +69,7 @@
         <h1>Publications</h1>
       </div>
 
-      <section class="publication-year" aria-labelledby="pub-2025">
-        <h2 id="pub-2025">2025</h2>
-        <ol class="publication-list">
-          <li>
-            <article class="publication">
-              <h3>Blind ECDSA from the ECDSA Assumption</h3>
-              <p class="authors">Jules Maire and Alan Pulval-Dady</p>
-              <p>IACR Communications in Cryptology, 2(3): 38, 2025.</p>
-              <div class="paper-links">
-                <a href="https://doi.org/10.62056/ahjbhee-3">open access</a>
-                <a href="https://dblp.org/rec/journals/cic/MaireP25">dblp</a>
-              </div>
-            </article>
-          </li>
-        </ol>
-      </section>
+      <div id="publications-list" class="publication-years"></div>
 
       <section class="content-block">
         <h2>Involvement in projects</h2>
@@ -102,39 +79,57 @@
       </section>
     </section>
 
+    <section id="seminar" class="panel" role="tabpanel" aria-labelledby="tab-seminar" hidden>
+      <div class="page-title">
+        <h1>CODE Crypto Seminar</h1>
+      </div>
+
+      <div class="seminar-sections">
+        <section class="seminar-section" aria-labelledby="upcoming-talks-heading">
+          <h2 id="upcoming-talks-heading">Upcoming talks</h2>
+          <div id="upcoming-talks" class="talk-list"></div>
+        </section>
+
+        <section class="seminar-section" aria-labelledby="past-talks-heading">
+          <h2 id="past-talks-heading">Past talks</h2>
+          <div id="past-talks" class="talk-list"></div>
+        </section>
+      </div>
+    </section>
+
     <section id="teaching" class="panel" role="tabpanel" aria-labelledby="tab-teaching" hidden>
       <div class="page-title">
         <h1>Teaching</h1>
       </div>
 
-      <div class="teaching-list">
-        <article class="teaching-card-wide">
-          <h2>Courses</h2>
-          <ul class="course-groups">
+      <div class="teaching-sections">
+        <section class="teaching-section">
+          <h2>Tutorials</h2>
+          <ul class="teaching-items">
             <li>
-              <span class="course-group-title">Tutorials</span>
-              <ul class="course-list">
-                <li>Privacy Enhancing Cryptography</li>
-                <li>Modern Cryptography</li>
-              </ul>
+              <span class="teaching-period">2026</span>
+              <span class="teaching-title">Privacy Enhancing Cryptography</span>
+            </li>
+            <li>
+              <span class="teaching-period">2026</span>
+              <span class="teaching-title">Modern Cryptography</span>
             </li>
           </ul>
-        </article>
+        </section>
 
-        <article>
-          <h2>TBD</h2>
-          <ul class="plain-list">
-            <li>TBD</li>
+        <section class="teaching-section">
+          <h2>Supervised Master Theses</h2>
+          <ul class="teaching-items">
+            <li>
+              <span class="teaching-period">Feb-June 2026</span>
+              <span class="teaching-title">Post-quantum anonymous credentials</span>
+            </li>
+            <li>
+              <span class="teaching-period">Feb-June 2026</span>
+              <span class="teaching-title">Multi-party computation protocol for signature verifications</span>
+            </li>
           </ul>
-        </article>
-
-        <article>
-          <h2>Master Thesis</h2>
-          <ul class="plain-list">
-            <li>Feb-June 2026 Subject : Post-quantum anonymous credentials</li>
-            <li>Feb-June 2026 Subject : Multy party computation protocol for signature verifications</li>
-          </ul>
-        </article>
+        </section>
       </div>
     </section>
 
@@ -167,6 +162,9 @@
     </div>
   </footer>
 
-  <script src="script.js?v=3"></script>
+  <script src="news.js?v=1"></script>
+  <script src="publications.js?v=1"></script>
+  <script src="seminar.js?v=1"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
