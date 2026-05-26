@@ -399,6 +399,54 @@ p {
   margin-top: 8px;
 }
 
+.cv-sections {
+  display: grid;
+  gap: 30px;
+}
+
+.cv-section {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.cv-section h2 {
+  color: var(--rust);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+}
+
+.cv-items {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-items li {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.cv-items li + li {
+  padding-top: 14px;
+}
+
+.cv-period {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.cv-items p {
+  color: #454b52;
+  margin-top: 6px;
+}
+
 .seminar-sections {
   display: grid;
   gap: 34px;
@@ -517,6 +565,26 @@ p {
   font-size: 1.08rem;
 }
 
+.teaching-year-groups {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.teaching-year-groups > li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.teaching-year {
+  color: var(--muted);
+  font-weight: 700;
+}
+
 .teaching-items {
   display: grid;
   gap: 0;
@@ -535,6 +603,10 @@ p {
 
 .teaching-items li + li {
   padding-top: 12px;
+}
+
+.teaching-items-simple li {
+  grid-template-columns: 1fr;
 }
 
 .teaching-period {
@@ -585,6 +657,7 @@ p {
 
   .profile-layout,
   .research-grid,
+  .cv-section,
   .seminar-section,
   .teaching-section,
   .contact-layout {
@@ -619,9 +692,19 @@ p {
     gap: 6px;
   }
 
+  .cv-items li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
   .teaching-items li {
     grid-template-columns: 1fr;
     gap: 2px;
+  }
+
+  .teaching-year-groups > li {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
   .talk-item summary {

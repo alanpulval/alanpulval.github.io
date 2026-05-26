@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alan Pulval-Dady</title>
-  <meta name="description" content="Academic homepage for Alan Pulval-Dady: research, publications, teaching, and contact information.">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <meta name="description" content="Academic homepage for Alan Pulval-Dady: research, CV, publications, teaching, and contact information.">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <header class="site-header">
@@ -20,6 +20,7 @@
 
       <nav class="tabs" role="tablist" aria-label="Main sections">
         <button id="tab-about" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="about" data-tab="about">About</button>
+        <button id="tab-cv" class="tab" type="button" role="tab" aria-selected="false" aria-controls="cv" data-tab="cv">CV</button>
         <button id="tab-publications" class="tab" type="button" role="tab" aria-selected="false" aria-controls="publications" data-tab="publications">Publications</button>
         <button id="tab-seminar" class="tab" type="button" role="tab" aria-selected="false" aria-controls="seminar" data-tab="seminar">Seminar</button>
         <button id="tab-teaching" class="tab" type="button" role="tab" aria-selected="false" aria-controls="teaching" data-tab="teaching">Teaching</button>
@@ -64,6 +65,96 @@
       </section>
     </section>
 
+    <section id="cv" class="panel" role="tabpanel" aria-labelledby="tab-cv" hidden>
+      <div class="page-title">
+        <h1>Curriculum Vitae</h1>
+      </div>
+
+      <div class="cv-sections">
+        <section class="cv-section">
+          <h2>Education</h2>
+          <ol class="cv-items">
+            <li>
+              <span class="cv-period">Feb 2025-present</span>
+              <div>
+                <h3>PhD Student, Universität der Bundeswehr München</h3>
+                <p>PhD student in cryptography at the Research Institute CODE, Munich.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">2022-2024</span>
+              <div>
+                <h3>Master CCA, Sorbonne University</h3>
+                <p>Cryptology, High Performance Computing, and Algorithmics. Coursework included zero-knowledge proofs, MPC-in-the-Head, lattices, error-correcting codes, and symmetric/asymmetric cryptography.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">2019-2022</span>
+              <div>
+                <h3>Bachelor's Degree in Computer Science, Sorbonne University</h3>
+                <p>Algorithms, data structures, computability, discrete mathematics, probability and statistics, linear algebra, and programming.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">2019</span>
+              <div>
+                <h3>Scientific Baccalaureate, Charles de Gaulle High School</h3>
+                <p>Engineering Sciences specialization, Mathematics specialty.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="cv-section">
+          <h2>Research Experience</h2>
+          <ol class="cv-items">
+            <li>
+              <span class="cv-period">Mar-Sep 2024</span>
+              <div>
+                <h3>Research Internship, LIP6 ALMASTY Team</h3>
+                <p>Supervisor: Damien Vergnaud. MPC-in-the-Head: new techniques and applications, with connections to post-quantum cryptography, zero-knowledge proofs, threshold protocols, and blind signatures.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">Jun-Sep 2024</span>
+              <div>
+                <h3>Research Internship, iExec R&amp;D Team</h3>
+                <p>Supervisor: Ambre Toulemonde. Performance and privacy in the iExec Marketplace using zero-knowledge proofs; implementation of a non-interactive zero-knowledge proof protocol.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">Jun-Aug 2024</span>
+              <div>
+                <h3>Research Internship, LIP6 QI Team</h3>
+                <p>Supervisor: Alex Bredariol Grilo. Study of the paper <em>Quantum Advantage with Any Non-Local Game</em>.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="cv-section">
+          <h2>Projects</h2>
+          <ol class="cv-items">
+            <li>
+              <span class="cv-period">Jan-Jun 2023</span>
+              <div>
+                <h3>Study of a Gröbner Basis in Two Variables</h3>
+                <p>Supervisor: Jeremy Berthomieux. Implementation of algorithms and study of Gröbner basis calculation under specific conditions.</p>
+              </div>
+            </li>
+            <li>
+              <span class="cv-period">Dec 2021-May 2022</span>
+              <div>
+                <h3>Proof of Concept for New Generation Blockchain</h3>
+                <p>Supervisor: Nour El Madhoun. Prototype implementation of a blockchain, development of a new protocol, and report writing.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+      </div>
+    </section>
+
     <section id="publications" class="panel" role="tabpanel" aria-labelledby="tab-publications" hidden>
       <div class="page-title">
         <h1>Publications</h1>
@@ -105,28 +196,36 @@
       <div class="teaching-sections">
         <section class="teaching-section">
           <h2>Tutorials</h2>
-          <ul class="teaching-items">
+          <ul class="teaching-year-groups">
             <li>
-              <span class="teaching-period">2026</span>
-              <span class="teaching-title">Privacy Enhancing Cryptography</span>
-            </li>
-            <li>
-              <span class="teaching-period">2026</span>
-              <span class="teaching-title">Modern Cryptography</span>
+              <span class="teaching-year">2026</span>
+              <ul class="teaching-items teaching-items-simple">
+                <li>
+                  <span class="teaching-title">Privacy Enhancing Cryptography</span>
+                </li>
+                <li>
+                  <span class="teaching-title">Modern Cryptography</span>
+                </li>
+              </ul>
             </li>
           </ul>
         </section>
 
         <section class="teaching-section">
           <h2>Supervised Master Theses</h2>
-          <ul class="teaching-items">
+          <ul class="teaching-year-groups">
             <li>
-              <span class="teaching-period">Feb-June 2026</span>
-              <span class="teaching-title">Post-quantum anonymous credentials</span>
-            </li>
-            <li>
-              <span class="teaching-period">Feb-June 2026</span>
-              <span class="teaching-title">Multi-party computation protocol for signature verifications</span>
+              <span class="teaching-year">2026</span>
+              <ul class="teaching-items">
+                <li>
+                  <span class="teaching-period">Feb-June</span>
+                  <span class="teaching-title">Post-quantum anonymous credentials</span>
+                </li>
+                <li>
+                  <span class="teaching-period">Feb-June</span>
+                  <span class="teaching-title">Multi-party computation protocol for signature verifications</span>
+                </li>
+              </ul>
             </li>
           </ul>
         </section>
