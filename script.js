@@ -1,4 +1,9 @@
-const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+const seminarTab = document.querySelector("#tab-seminar");
+const hasSeminarTalks = Array.isArray(window.SEMINAR_TALKS)
+  && window.SEMINAR_TALKS.some((talk) => talk.date && talk.speaker && talk.title);
+seminarTab.hidden = !hasSeminarTalks;
+
+const tabs = Array.from(document.querySelectorAll('[role="tab"]')).filter((tab) => !tab.hidden);
 const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
 const validTabs = new Set(tabs.map((tab) => tab.dataset.tab));
 
@@ -14,6 +19,76 @@ function createElement(tagName, options = {}) {
   }
 
   return element;
+}
+
+function renderCV() {
+  const target = document.querySelector("#cv-sections");
+
+  if (!target || !Array.isArray(window.CV_SECTIONS)) {
+    return;
+  }
+
+  target.replaceChildren(...window.CV_SECTIONS.map((group) => {
+    const section = createElement("section", { className: "cv-section" });
+    const heading = createElement("h2", { text: group.title });
+    const list = createElement("ol", { className: "cv-items" });
+
+    (group.items || []).forEach((entry) => {
+      const item = createElement("li");
+      const period = createElement("span", { className: "cv-period", text: entry.period });
+      const content = createElement("div");
+      content.append(createElement("h3", { text: entry.title }));
+
+      if (entry.description) {
+        content.append(createElement("p", { text: entry.description }));
+      }
+
+      item.append(period, content);
+      list.append(item);
+    });
+
+    section.append(heading, list);
+    return section;
+  }));
+}
+
+function renderTeaching() {
+  const target = document.querySelector("#teaching-sections");
+
+  if (!target || !Array.isArray(window.TEACHING)) {
+    return;
+  }
+
+  target.replaceChildren(...window.TEACHING.map((group) => {
+    const section = createElement("section", { className: "teaching-section" });
+    const heading = createElement("h2", { text: group.title });
+    const yearGroups = createElement("ul", { className: "teaching-year-groups" });
+
+    (group.years || []).forEach((yearGroup) => {
+      const yearItem = createElement("li");
+      const year = createElement("span", { className: "teaching-year", text: String(yearGroup.year) });
+      const items = createElement("ul", { className: "teaching-items" });
+
+      (yearGroup.items || []).forEach((entry) => {
+        const item = createElement("li");
+
+        if (entry.period) {
+          item.append(createElement("span", { className: "teaching-period", text: entry.period }));
+        } else {
+          item.classList.add("teaching-item-simple");
+        }
+
+        item.append(createElement("span", { className: "teaching-title", text: entry.title }));
+        items.append(item);
+      });
+
+      yearItem.append(year, items);
+      yearGroups.append(yearItem);
+    });
+
+    section.append(heading, yearGroups);
+    return section;
+  }));
 }
 
 function renderPublications() {
@@ -272,5 +347,7 @@ window.addEventListener("popstate", () => {
 renderNews();
 renderPublications();
 renderSeminarTalks();
+renderCV();
+renderTeaching();
 activateTab(window.location.hash.slice(1), true);
 window.addEventListener("load", resetScroll);

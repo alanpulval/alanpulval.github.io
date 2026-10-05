@@ -137,6 +137,10 @@ button {
   font-weight: 600;
 }
 
+.tab[hidden] {
+  display: none;
+}
+
 .tab:hover,
 .tab:focus-visible {
   color: var(--ink);
@@ -605,7 +609,7 @@ p {
   padding-top: 12px;
 }
 
-.teaching-items-simple li {
+.teaching-item-simple {
   grid-template-columns: 1fr;
 }
 

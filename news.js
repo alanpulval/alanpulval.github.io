@@ -1,6 +1,14 @@
 // Add future news here; the page sorts entries by date automatically.
 window.NEWS = [
   {
+    date: "2026-10-04",
+    description: "is now available as an IACR ePrint preprint.",
+    link: {
+      label: "Context-Blind Device-Bound Anonymous Credentials from Signatures and Proofs",
+      url: "https://eprint.iacr.org/2026/2295"
+    }
+  },
+  {
     date: "2026-05-31",
     description: "is now available as an IACR ePrint preprint.",
     link: {
