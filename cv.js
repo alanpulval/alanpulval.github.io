@@ -34,12 +34,12 @@ window.CV_SECTIONS = [
         description: "Supervisor: Damien Vergnaud. MPC-in-the-Head: new techniques and applications, with connections to post-quantum cryptography, zero-knowledge proofs, threshold protocols, and blind signatures."
       },
       {
-        period: "Jun-Sep 2024",
+        period: "Jun-Sep 2023",
         title: "Research Internship, iExec R&D Team",
         description: "Supervisor: Ambre Toulemonde. Performance and privacy in the iExec Marketplace using zero-knowledge proofs; implementation of a non-interactive zero-knowledge proof protocol."
       },
       {
-        period: "Jun-Aug 2024",
+        period: "Jun-Aug 2022",
         title: "Research Internship, LIP6 QI Team",
         description: "Supervisor: Alex Bredariol Grilo. Study of the paper Quantum Advantage with Any Non-Local Game."
       }
