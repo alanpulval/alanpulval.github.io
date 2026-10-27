@@ -1,0 +1,21 @@
+import { randomBytes, pbkdf2Sync, createCipheriv } from 'node:crypto';
+import { readFileSync as readText, writeFileSync as writeText, existsSync, mkdirSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+
+// Usage: node brain/encrypt.mjs <private-source.json> <public-data.enc.json> <private-password.txt>
+const [, , sourceArg, outputArg, passwordArg] = process.argv;
+if (!sourceArg || !outputArg || !passwordArg) throw new Error('Usage: node brain/encrypt.mjs <private-source.json> <public-data.enc.json> <private-password.txt>');
+const source = resolve(sourceArg), output = resolve(outputArg), passwordFile = resolve(passwordArg);
+const data = JSON.parse(readText(source, 'utf8'));
+if (!Array.isArray(data.nodes) || !Array.isArray(data.edges)) throw new Error('Expected nodes and edges arrays');
+mkdirSync(dirname(passwordFile), { recursive: true });
+if (!existsSync(passwordFile)) writeText(passwordFile, randomBytes(24).toString('base64url'), { encoding: 'utf8', mode: 0o600 });
+const password = readText(passwordFile, 'utf8').trimEnd();
+if (password.length < 24) throw new Error('Password must have at least 24 characters');
+const salt = randomBytes(16), iv = randomBytes(12), iterations = 310000;
+const key = pbkdf2Sync(password, salt, iterations, 32, 'sha256');
+const cipher = createCipheriv('aes-256-gcm', key, iv);
+const ciphertext = Buffer.concat([cipher.update(JSON.stringify(data), 'utf8'), cipher.final(), cipher.getAuthTag()]);
+const payload = { version: 1, kdf: 'PBKDF2-SHA256', cipher: 'AES-256-GCM', iterations, salt: salt.toString('base64'), iv: iv.toString('base64'), ciphertext: ciphertext.toString('base64') };
+writeText(output, JSON.stringify(payload) + '\n');
+console.log(`Encrypted ${data.nodes.length} nodes and ${data.edges.length} edges to ${output}`);

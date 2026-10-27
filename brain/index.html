@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Atlas des hypothèses · Alan Pulval-Dady</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="lock" class="lock-screen">
+    <form id="unlock-form" class="lock-card">
+      <div class="mark">APD / RESEARCH</div>
+      <h1>Atlas des hypothèses</h1>
+      <p>Une carte personnelle pour étudier les hypothèses cryptographiques et construire des preuves de sécurité.</p>
+      <label for="password">Mot de passe</label>
+      <div class="password-row"><input id="password" type="password" autocomplete="current-password" required autofocus><button type="submit">Ouvrir</button></div>
+      <p id="lock-error" class="error" role="alert" aria-live="polite"></p>
+      <small>Le contenu est déchiffré localement dans votre navigateur.</small>
+    </form>
+  </div>
+  <main id="app" hidden>
+    <header class="topbar">
+      <div><div class="mark">APD / RESEARCH</div><h1>Atlas des hypothèses</h1><p>Une carte de travail pour raisonner sur les preuves de sécurité.</p></div>
+      <button id="relock" class="quiet" type="button">Verrouiller</button>
+    </header>
+    <div class="notice">Carte de départ, non exhaustive. Une liaison « à étudier » ou « variante » ne signifie pas une réduction de sécurité. Vérifier systématiquement les paramètres, le modèle et le sens de la réduction dans la source.</div>
+    <div class="workspace">
+      <aside class="sidebar">
+        <label for="search">Rechercher</label><input id="search" type="search" placeholder="LWE, DDH, RSA…">
+        <label for="family">Domaine</label><select id="family"><option value="all">Tous les domaines</option></select>
+        <label for="relation">Liaisons</label><select id="relation"><option value="all">Toutes les liaisons</option><option value="study">À étudier</option><option value="variant">Variante</option><option value="implication">Implication</option></select>
+        <div id="stats" class="stats"></div>
+        <p class="hint">Cliquez sur une hypothèse pour lire son jeu, les pièges de preuve et les articles de départ. Molette pour zoomer ; glisser pour déplacer la carte.</p>
+        <div class="legend"><span><i class="dot lattice"></i> Réseaux</span><span><i class="dot group"></i> Groupes</span><span><i class="dot rsa"></i> RSA</span><span><i class="dot codes"></i> Codes</span><span><i class="dot foundations"></i> Fondations</span></div>
+      </aside>
+      <section class="canvas-wrap" aria-label="Graphe des hypothèses">
+        <div class="canvas-tools"><button id="zoom-in" type="button" aria-label="Agrandir">+</button><button id="zoom-out" type="button" aria-label="Réduire">−</button><button id="zoom-reset" type="button">Centrer</button></div>
+        <svg id="graph" role="img" aria-label="Carte interactive des hypothèses cryptographiques"></svg>
+      </section>
+      <aside id="detail" class="detail"><p class="empty">Choisissez un nœud pour ouvrir sa fiche.</p></aside>
+    </div>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>
