@@ -2,7 +2,8 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const svgNS = 'http://www.w3.org/2000/svg';
-  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes' };
+  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes', signature: 'Signatures', blind: 'Signatures aveugles', credential: 'Credentials' };
+  const familyOrder = { assumption: ['foundations', 'group', 'rsa', 'lattice', 'codes'], property: ['signature', 'blind', 'credential'] };
   const relationNames = { study: 'À étudier', variant: 'Variante', implication: 'Implication' };
   let atlas = null, selected = null, transform = { x: 55, y: 40, scale: 1 }, dragging = null;
   const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
@@ -32,27 +33,35 @@
       atlas = await decrypt(password);
       $('password').value = '';
       $('lock').hidden = true; $('app').hidden = false;
-      const families = [...new Set(atlas.nodes.map((n) => n.family))];
-      for (const family of families) { const option = document.createElement('option'); option.value = family; option.textContent = familyNames[family] || family; $('family').append(option); }
+      updateFamilies();
       fit(); render();
     } catch (error) { $('lock-error').textContent = error.name === 'OperationError' ? 'Mot de passe incorrect.' : error.message; }
     finally { button.disabled = false; button.textContent = 'Ouvrir'; }
   });
   $('relock').addEventListener('click', () => { atlas = null; selected = null; $('graph').replaceChildren(); $('detail').replaceChildren(); $('app').hidden = true; $('lock').hidden = false; $('password').focus(); });
+  $('view').addEventListener('change', () => { selected = null; $('search').value = ''; $('relation').value = 'all'; $('detail').innerHTML = '<p class="empty">Choisissez un nœud pour ouvrir sa fiche.</p>'; updateFamilies(); fit(); render(); });
   for (const id of ['search', 'family', 'relation']) $(id).addEventListener(id === 'search' ? 'input' : 'change', () => { if (id !== 'relation') fit(); render(); });
+
+  function updateFamilies() {
+    $('family').replaceChildren(new Option('Toutes les familles', 'all'));
+    for (const family of familyOrder[$('view').value]) {
+      if (!atlas.nodes.some((node) => node.family === family)) continue;
+      $('family').add(new Option(familyNames[family], family));
+    }
+  }
 
   function visible() {
     const query = $('search').value.trim().toLowerCase();
     const family = $('family').value;
     const relation = $('relation').value;
-    const nodes = atlas.nodes.filter((n) => (family === 'all' || n.family === family) && (!query || [n.id, n.label, n.definition, ...(n.tags || [])].join(' ').toLowerCase().includes(query)));
+    const nodes = atlas.nodes.filter((n) => (n.kind || 'assumption') === $('view').value && (family === 'all' || n.family === family) && (!query || [n.id, n.label, n.subtitle, n.definition, ...(n.tags || [])].join(' ').toLowerCase().includes(query)));
     const ids = new Set(nodes.map((n) => n.id));
     const edges = atlas.edges.filter((e) => ids.has(e.from) && ids.has(e.to) && (relation === 'all' || e.type === relation));
     return { nodes, edges };
   }
 
   function layout(nodes) {
-    const families = ['foundations', 'group', 'rsa', 'lattice', 'codes'].filter((family) => nodes.some((node) => node.family === family));
+    const families = familyOrder[$('view').value].filter((family) => nodes.some((node) => node.family === family));
     const positions = new Map();
     families.forEach((family, column) => {
       nodes.filter((n) => n.family === family).forEach((n, row) => positions.set(n.id, { x: column * 220 + 75, y: row * 84 + 90 }));
@@ -94,7 +103,10 @@
       viewport.append(group);
     }
     svg.append(viewport);
-    $('stats').textContent = `${nodes.length} hypothèses · ${edges.length} liaisons visibles`;
+    $('stats').textContent = `${nodes.length} ${$('view').value === 'property' ? 'propriétés' : 'hypothèses'} · ${edges.length} liaisons visibles`;
+    $('notice').textContent = $('view').value === 'property' ? 'Ces propriétés sont des objectifs définis par des jeux de sécurité. Leur relation ne prouve rien pour une construction particulière : vérifier le modèle, les oracles, les corruptions et les informations révélées.' : 'Carte de départ, non exhaustive. Une liaison « à étudier » ou « variante » ne signifie pas une réduction de sécurité. Vérifier systématiquement les paramètres, le modèle et le sens de la réduction dans la source.';
+    $('legend-assumption').hidden = $('view').value !== 'assumption';
+    $('legend-property').hidden = $('view').value !== 'property';
     if (selected && !ids.has(selected)) { selected = null; $('detail').innerHTML = '<p class="empty">Choisissez un nœud pour ouvrir sa fiche.</p>'; }
   }
 
@@ -106,7 +118,7 @@
     const sources = (node.sources || []).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a></li>`).join('');
     const links = related.map((e) => { const other = e.from === id ? e.to : e.from; return `<div class="relation"><span class="kind">${esc(relationNames[e.type])}</span> · <button type="button" data-node="${esc(other)}">${esc(other)}</button><br>${esc(e.note || '')}</div>`; }).join('');
     $('detail').innerHTML = `<span class="tag">${esc(familyNames[node.family] || node.family)}</span><h2>${esc(node.label)}</h2><p class="caption">${esc(node.subtitle || '')}</p><h3>Définition / jeu</h3><p>${esc(node.definition)}</p><h3>À vérifier dans une preuve</h3><p>${esc(node.proof)}</p><h3>Piège courant</h3><p>${esc(node.pitfall)}</p><h3>Liaisons</h3>${links || '<p class="caption">Aucune liaison pour cette vue.</p>'}<h3>Sources de départ</h3><ul>${sources}</ul>`;
-    $('detail').querySelectorAll('[data-node]').forEach((button) => button.addEventListener('click', () => { $('family').value = 'all'; $('search').value = ''; $('relation').value = 'all'; select(button.dataset.node); }));
+    $('detail').querySelectorAll('[data-node]').forEach((button) => button.addEventListener('click', () => { const target = atlas.nodes.find((item) => item.id === button.dataset.node); if (!target) return; $('view').value = target.kind || 'assumption'; updateFamilies(); $('family').value = 'all'; $('search').value = ''; $('relation').value = 'all'; fit(); select(button.dataset.node); }));
   }
 
   const canvas = $('graph');

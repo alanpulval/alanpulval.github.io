@@ -2,12 +2,18 @@ import { randomBytes, pbkdf2Sync, createCipheriv } from 'node:crypto';
 import { readFileSync as readText, writeFileSync as writeText, existsSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-// Usage: node brain/encrypt.mjs <private-source.json> <public-index.html> <private-password.txt>
-const [, , sourceArg, outputArg, passwordArg] = process.argv;
-if (!sourceArg || !outputArg || !passwordArg) throw new Error('Usage: node brain/encrypt.mjs <private-source.json> <public-index.html> <private-password.txt>');
+// Usage: node brain/encrypt.mjs <private-assumptions.json> <public-index.html> <private-password.txt> [private-properties.json]
+const [, , sourceArg, outputArg, passwordArg, propertiesArg] = process.argv;
+if (!sourceArg || !outputArg || !passwordArg) throw new Error('Usage: node brain/encrypt.mjs <private-assumptions.json> <public-index.html> <private-password.txt> [private-properties.json]');
 const source = resolve(sourceArg), output = resolve(outputArg), passwordFile = resolve(passwordArg);
 const data = JSON.parse(readText(source, 'utf8'));
 if (!Array.isArray(data.nodes) || !Array.isArray(data.edges)) throw new Error('Expected nodes and edges arrays');
+if (propertiesArg) {
+  const properties = JSON.parse(readText(resolve(propertiesArg), 'utf8'));
+  if (!Array.isArray(properties.nodes) || !Array.isArray(properties.edges)) throw new Error('Expected property nodes and edges arrays');
+  data.nodes.push(...properties.nodes);
+  data.edges.push(...properties.edges);
+}
 mkdirSync(dirname(passwordFile), { recursive: true });
 if (!existsSync(passwordFile)) writeText(passwordFile, randomBytes(24).toString('base64url'), { encoding: 'utf8', mode: 0o600 });
 const password = readText(passwordFile, 'utf8').trimEnd();
