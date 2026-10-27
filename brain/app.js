@@ -76,7 +76,8 @@
     const width = Math.max(...positions.map((p) => p.x)) + 90;
     const height = Math.max(...positions.map((p) => p.y)) + 55;
     const canvas = $('graph');
-    transform = { x: 20, y: 20, scale: Math.min(1, (canvas.clientWidth - 40) / width, (canvas.clientHeight - 40) / height) };
+    const scale = Math.min(1, (canvas.clientWidth - 40) / width, (canvas.clientHeight - 40) / height);
+    transform = { x: Math.max(20, (canvas.clientWidth - width * scale) / 2), y: Math.max(20, (canvas.clientHeight - height * scale) / 2), scale };
   }
 
   function render() {
