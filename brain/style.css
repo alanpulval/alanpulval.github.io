@@ -3,3 +3,4 @@
 .dot.signature{background:#60b7d8}.dot.blind{background:#bd8bee}.dot.credential{background:#8fc976}.node.signature rect{fill:#25576b}.node.blind rect{fill:#65427d}.node.credential rect{fill:#426337}
 .dot.encryption{background:#77a3fb}.node.encryption rect{fill:#34578c}
 .dot.time{background:#76b8ef}.node.time rect{fill:#315c7d}.dot.random{background:#92cb9a}.node.random rect{fill:#376a52}.dot.hierarchy{background:#eab17a}.node.hierarchy rect{fill:#775138}.dot.circuits{background:#c5a2f3}.node.circuits rect{fill:#604779}.edge.inclusion{stroke:#85d9a7;stroke-width:2.2}.edge.open{stroke:#efab87;stroke-dasharray:5 4}
+.dot.modelbase{background:#d6cb8f}.node.modelbase rect{fill:#665b3e}.dot.modelgroup{background:#82c5c5}.node.modelgroup rect{fill:#326667}.dot.modeloracle{background:#ac9df0}.node.modeloracle rect{fill:#554c80}.dot.modelcontext{background:#91c592}.node.modelcontext rect{fill:#476c48}

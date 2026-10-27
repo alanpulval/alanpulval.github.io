@@ -2,8 +2,8 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const svgNS = 'http://www.w3.org/2000/svg';
-  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes', encryption: 'Chiffrement & FHE', signature: 'Signatures', blind: 'Signatures aveugles', credential: 'Credentials', time: 'Temps', random: 'Aléatoire & quantique', hierarchy: 'Hiérarchies & comptage', circuits: 'Circuits' };
-  const familyOrder = { assumption: ['foundations', 'group', 'rsa', 'lattice', 'codes'], property: ['encryption', 'signature', 'blind', 'credential'], complexity: ['time', 'random', 'hierarchy', 'circuits'] };
+  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes', encryption: 'Chiffrement & FHE', signature: 'Signatures', blind: 'Signatures aveugles', credential: 'Credentials', time: 'Temps', random: 'Aléatoire & quantique', hierarchy: 'Hiérarchies & comptage', circuits: 'Circuits', modelbase: 'Référence', modelgroup: 'Groupes', modeloracle: 'Oracles', modelcontext: 'Setup & composition' };
+  const familyOrder = { assumption: ['foundations', 'group', 'rsa', 'lattice', 'codes'], property: ['encryption', 'signature', 'blind', 'credential'], complexity: ['time', 'random', 'hierarchy', 'circuits'], model: ['modelbase', 'modelgroup', 'modeloracle', 'modelcontext'] };
   const relationNames = { study: 'À étudier', variant: 'Variante', implication: 'Implication', inclusion: 'Inclusion démontrée', open: 'Question ouverte' };
   let atlas = null, selected = null, transform = { x: 55, y: 40, scale: 1 }, dragging = null;
   const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
@@ -52,10 +52,10 @@
 
   function updateRelations() {
     $('relation').replaceChildren(new Option('Toutes les liaisons', 'all'));
-    const types = $('view').value === 'complexity' ? ['inclusion', 'open', 'study'] : ['study', 'variant', 'implication'];
+    const types = $('view').value === 'complexity' ? ['inclusion', 'open', 'study'] : $('view').value === 'model' ? ['study', 'variant'] : ['study', 'variant', 'implication'];
     for (const type of types) $('relation').add(new Option(relationNames[type], type));
-    $('search').placeholder = $('view').value === 'complexity' ? 'P, NP, BQP, TC⁰…' : $('view').value === 'property' ? 'Blindness, CCA2, OMUF…' : 'LWE, DDH, SIS…';
-    $('view-hint').textContent = $('view').value === 'complexity' ? 'Cliquez sur une classe pour voir sa définition, une idée à retenir, les pièges et les sources. Molette pour zoomer ; glisser pour déplacer la carte.' : 'Cliquez sur un nœud pour lire son jeu, les pièges de preuve et les sources. Molette pour zoomer ; glisser pour déplacer la carte.';
+    $('search').placeholder = $('view').value === 'complexity' ? 'P, NP, BQP, TC⁰…' : $('view').value === 'model' ? 'GGM, ROM, UC…' : $('view').value === 'property' ? 'Blindness, CCA2, OMUF…' : 'LWE, DDH, SIS…';
+    $('view-hint').textContent = $('view').value === 'complexity' ? 'Cliquez sur une classe pour voir sa définition, une idée à retenir, les pièges et les sources. Molette pour zoomer ; glisser pour déplacer la carte.' : $('view').value === 'model' ? 'Cliquez sur un modèle pour voir son rôle, ce qu’il faut vérifier dans une preuve, ses limites et les sources.' : 'Cliquez sur un nœud pour lire son jeu, les pièges de preuve et les sources. Molette pour zoomer ; glisser pour déplacer la carte.';
   }
 
   function visible() {
@@ -113,11 +113,12 @@
     }
     svg.append(viewport);
     const view = $('view').value;
-    $('stats').textContent = `${nodes.length} ${view === 'property' ? 'propriétés' : view === 'complexity' ? 'classes' : 'hypothèses'} · ${edges.length} liaisons visibles`;
-    $('notice').textContent = view === 'complexity' ? 'Une inclusion A ⊆ B signifie que tout problème de A est aussi dans B ; elle ne dit pas si A = B. ETH est une hypothèse de temps pour SAT, pas une classe. #P contient des fonctions de comptage, contrairement aux autres classes de décision affichées.' : view === 'property' ? 'Ces propriétés sont des objectifs définis par des jeux de sécurité. Leur relation ne prouve rien pour une construction particulière : vérifier le modèle, les oracles, les corruptions et les informations révélées.' : 'Carte de départ, non exhaustive. Une liaison « à étudier » ou « variante » ne signifie pas une réduction de sécurité. Vérifier systématiquement les paramètres, le modèle et le sens de la réduction dans la source.';
+    $('stats').textContent = `${nodes.length} ${view === 'property' ? 'propriétés' : view === 'complexity' ? 'classes' : view === 'model' ? 'modèles' : 'hypothèses'} · ${edges.length} liaisons visibles`;
+    $('notice').textContent = view === 'model' ? 'Ces fiches mélangent volontairement plusieurs axes : restrictions sur les groupes, oracle idéalisé, setup et cadre de composition. Une liaison indique un sujet à comparer, pas une implication automatique entre preuves.' : view === 'complexity' ? 'Une inclusion A ⊆ B signifie que tout problème de A est aussi dans B ; elle ne dit pas si A = B. ETH est une hypothèse de temps pour SAT, pas une classe. #P contient des fonctions de comptage, contrairement aux autres classes de décision affichées.' : view === 'property' ? 'Ces propriétés sont des objectifs définis par des jeux de sécurité. Leur relation ne prouve rien pour une construction particulière : vérifier le modèle, les oracles, les corruptions et les informations révélées.' : 'Carte de départ, non exhaustive. Une liaison « à étudier » ou « variante » ne signifie pas une réduction de sécurité. Vérifier systématiquement les paramètres, le modèle et le sens de la réduction dans la source.';
     $('legend-assumption').hidden = $('view').value !== 'assumption';
     $('legend-property').hidden = $('view').value !== 'property';
     $('legend-complexity').hidden = $('view').value !== 'complexity';
+    $('legend-model').hidden = $('view').value !== 'model';
     if (selected && !ids.has(selected)) { selected = null; $('detail').innerHTML = '<p class="empty">Choisissez un nœud pour ouvrir sa fiche.</p>'; }
   }
 
@@ -128,8 +129,8 @@
     const related = atlas.edges.filter((e) => e.from === id || e.to === id);
     const sources = (node.sources || []).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a></li>`).join('');
     const links = related.map((e) => { const other = e.from === id ? e.to : e.from; return `<div class="relation"><span class="kind">${esc(relationNames[e.type])}</span> · <button type="button" data-node="${esc(other)}">${esc(other)}</button><br>${esc(e.note || '')}</div>`; }).join('');
-    const isComplexity = (node.kind || 'assumption') === 'complexity';
-    $('detail').innerHTML = `<span class="tag">${esc(familyNames[node.family] || node.family)}</span><h2>${esc(node.label)}</h2><p class="caption">${esc(node.subtitle || '')}</p><h3>${isComplexity ? 'Définition' : 'Définition / jeu'}</h3><p>${esc(node.definition)}</p><h3>${isComplexity ? 'À retenir' : 'À vérifier dans une preuve'}</h3><p>${esc(node.proof)}</p><h3>Piège courant</h3><p>${esc(node.pitfall)}</p><h3>Liaisons</h3>${links || '<p class="caption">Aucune liaison pour cette vue.</p>'}<h3>Sources de départ</h3><ul>${sources}</ul>`;
+    const kind = node.kind || 'assumption';
+    $('detail').innerHTML = `<span class="tag">${esc(familyNames[node.family] || node.family)}</span><h2>${esc(node.label)}</h2><p class="caption">${esc(node.subtitle || '')}</p><h3>${kind === 'complexity' || kind === 'model' ? 'Définition' : 'Définition / jeu'}</h3><p>${esc(node.definition)}</p><h3>${kind === 'complexity' ? 'À retenir' : 'À vérifier dans une preuve'}</h3><p>${esc(node.proof)}</p><h3>Piège courant</h3><p>${esc(node.pitfall)}</p><h3>Liaisons</h3>${links || '<p class="caption">Aucune liaison pour cette vue.</p>'}<h3>Sources de départ</h3><ul>${sources}</ul>`;
     $('detail').querySelectorAll('[data-node]').forEach((button) => button.addEventListener('click', () => { const target = atlas.nodes.find((item) => item.id === button.dataset.node); if (!target) return; $('view').value = target.kind || 'assumption'; updateFamilies(); updateRelations(); $('family').value = 'all'; $('search').value = ''; fit(); select(button.dataset.node); }));
   }
 
