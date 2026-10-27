@@ -34,12 +34,12 @@
       $('lock').hidden = true; $('app').hidden = false;
       const families = [...new Set(atlas.nodes.map((n) => n.family))];
       for (const family of families) { const option = document.createElement('option'); option.value = family; option.textContent = familyNames[family] || family; $('family').append(option); }
-      render();
+      fit(); render();
     } catch (error) { $('lock-error').textContent = error.name === 'OperationError' ? 'Mot de passe incorrect.' : error.message; }
     finally { button.disabled = false; button.textContent = 'Ouvrir'; }
   });
   $('relock').addEventListener('click', () => { atlas = null; selected = null; $('graph').replaceChildren(); $('detail').replaceChildren(); $('app').hidden = true; $('lock').hidden = false; $('password').focus(); });
-  for (const id of ['search', 'family', 'relation']) $(id).addEventListener(id === 'search' ? 'input' : 'change', render);
+  for (const id of ['search', 'family', 'relation']) $(id).addEventListener(id === 'search' ? 'input' : 'change', () => { if (id !== 'relation') fit(); render(); });
 
   function visible() {
     const query = $('search').value.trim().toLowerCase();
@@ -58,6 +58,16 @@
       nodes.filter((n) => n.family === family).forEach((n, row) => positions.set(n.id, { x: column * 220 + 75, y: row * 84 + 90 }));
     });
     return positions;
+  }
+
+  function fit() {
+    if (!atlas) return;
+    const positions = [...layout(visible().nodes).values()];
+    if (!positions.length) return;
+    const width = Math.max(...positions.map((p) => p.x)) + 90;
+    const height = Math.max(...positions.map((p) => p.y)) + 55;
+    const canvas = $('graph');
+    transform = { x: 20, y: 20, scale: Math.min(1, (canvas.clientWidth - 40) / width, (canvas.clientHeight - 40) / height) };
   }
 
   function render() {
@@ -107,5 +117,5 @@
   canvas.addEventListener('wheel', (event) => { event.preventDefault(); transform.scale = Math.max(.45, Math.min(2.5, transform.scale * (event.deltaY < 0 ? 1.12 : .89))); render(); }, { passive: false });
   $('zoom-in').addEventListener('click', () => { transform.scale = Math.min(2.5, transform.scale * 1.2); render(); });
   $('zoom-out').addEventListener('click', () => { transform.scale = Math.max(.45, transform.scale / 1.2); render(); });
-  $('zoom-reset').addEventListener('click', () => { transform = { x: 55, y: 40, scale: 1 }; render(); });
+  $('zoom-reset').addEventListener('click', () => { fit(); render(); });
 })();
