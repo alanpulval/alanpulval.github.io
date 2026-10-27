@@ -11,9 +11,9 @@
 
   async function decrypt(password) {
     if (!crypto.subtle) throw new Error('Ce navigateur ne permet pas le déchiffrement sécurisé. Utilisez HTTPS.');
-    const response = await fetch('./data.enc.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Impossible de charger la carte.');
-    const payload = await response.json();
+    const embedded = $('encrypted-atlas');
+    if (!embedded) throw new Error('Carte chiffrée absente. Rechargez la page.');
+    const payload = JSON.parse(embedded.textContent);
     if (payload.version !== 1 || payload.kdf !== 'PBKDF2-SHA256' || payload.cipher !== 'AES-256-GCM') throw new Error('Format de carte inconnu.');
     const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
     const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(payload.salt), iterations: payload.iterations, hash: 'SHA-256' }, material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
