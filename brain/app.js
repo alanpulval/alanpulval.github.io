@@ -2,8 +2,8 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const svgNS = 'http://www.w3.org/2000/svg';
-  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes', signature: 'Signatures', blind: 'Signatures aveugles', credential: 'Credentials' };
-  const familyOrder = { assumption: ['foundations', 'group', 'rsa', 'lattice', 'codes'], property: ['signature', 'blind', 'credential'] };
+  const familyNames = { foundations: 'Fondations', group: 'Groupes & couplages', rsa: 'RSA & factorisation', lattice: 'Réseaux', codes: 'Codes', encryption: 'Chiffrement & FHE', signature: 'Signatures', blind: 'Signatures aveugles', credential: 'Credentials' };
+  const familyOrder = { assumption: ['foundations', 'group', 'rsa', 'lattice', 'codes'], property: ['encryption', 'signature', 'blind', 'credential'] };
   const relationNames = { study: 'À étudier', variant: 'Variante', implication: 'Implication' };
   let atlas = null, selected = null, transform = { x: 55, y: 40, scale: 1 }, dragging = null;
   const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
