@@ -1,7 +1,7 @@
 // Add courses and supervised theses here; each category is grouped by year.
 window.TEACHING = [
   {
-    title: "Tutorials",
+    title: "Tutorials (Master’s students)",
     years: [
       {
         year: 2026,

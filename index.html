@@ -3,147 +3,261 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alan Pulval-Dady</title>
-  <meta name="description" content="Academic homepage for Alan Pulval-Dady: research updates, CV, and contact information.">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <title>Alan Pulval-Dady — PhD Student in Cryptography</title>
+  <meta name="description" content="Alan Pulval-Dady is a PhD student in cryptography at the Research Institute CODE, Universität der Bundeswehr München, supervised by Mark Manulis and Daniel Slamanig. His research focuses on privacy-enhancing and post-quantum cryptography, anonymous credentials, and blind signatures.">
+  <meta name="author" content="Alan Pulval-Dady">
+  <meta name="theme-color" content="#e4eef6">
+  <link rel="canonical" href="https://alanpulval.github.io/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Alan Pulval-Dady — PhD Student in Cryptography">
+  <meta property="og:description" content="PhD student at the Research Institute CODE, supervised by Mark Manulis and Daniel Slamanig. Research on privacy-enhancing and post-quantum cryptography, anonymous credentials, and blind signatures.">
+  <meta property="og:url" content="https://alanpulval.github.io/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Alan Pulval-Dady — PhD Student in Cryptography">
+  <meta name="twitter:description" content="PhD student at the Research Institute CODE, supervised by Mark Manulis and Daniel Slamanig. Research on privacy-enhancing and post-quantum cryptography.">
+
+  <link rel="stylesheet" href="styles.css?v=19">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alan Pulval-Dady",
+      "jobTitle": "PhD Student in Cryptography",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universität der Bundeswehr München"
+      },
+      "url": "https://alanpulval.github.io/",
+      "sameAs": [
+        "https://dblp.org/pid/392/7667.html",
+        "https://www.unibw.de/pacy/team/alan-pulval-dady-m-sc",
+        "https://www.linkedin.com/in/alan-pulval-dady/"
+      ],
+      "knowsAbout": [
+        "Cryptography",
+        "Post-quantum cryptography",
+        "Blind signatures",
+        "Anonymous credentials",
+        "MPC-in-the-Head"
+      ]
+    }
+  </script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#about" aria-label="Alan Pulval-Dady home">
-        <span class="brand-mark" aria-hidden="true">
-          <img class="brand-photo" src="assets/photoalan.png" alt="" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
-          <span class="brand-initials">APD</span>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Alan Pulval-Dady — back to top">
+        <span class="brand-text">
+          <strong>Alan Pulval-Dady</strong>
+          <span>Cryptography · UniBw München</span>
         </span>
-        <span class="brand-name">Alan Pulval-Dady</span>
       </a>
 
-      <nav class="tabs" role="tablist" aria-label="Main sections">
-        <button id="tab-about" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="about" data-tab="about">About</button>
-        <button id="tab-cv" class="tab" type="button" role="tab" aria-selected="false" aria-controls="cv" data-tab="cv">CV</button>
-        <button id="tab-publications" class="tab" type="button" role="tab" aria-selected="false" aria-controls="publications" data-tab="publications" hidden>Publications</button>
-        <button id="tab-seminar" class="tab" type="button" role="tab" aria-selected="false" aria-controls="seminar" data-tab="seminar" hidden>Seminar</button>
-        <button id="tab-teaching" class="tab" type="button" role="tab" aria-selected="false" aria-controls="teaching" data-tab="teaching" hidden>Teaching</button>
-        <button id="tab-contact" class="tab" type="button" role="tab" aria-selected="false" aria-controls="contact" data-tab="contact">Contact</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-label">Menu</span>
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#seminar" hidden>Seminar</a>
+        <a href="#cv">CV</a>
+        <a class="nav-contact" href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="container main-content">
-    <section id="about" class="panel is-active" role="tabpanel" aria-labelledby="tab-about">
-      <div class="about-hero">
-        <h1>Alan Pulval-Dady</h1>
-        <p class="subtitle">PhD Student at Universit&auml;t der Bundeswehr M&uuml;nchen</p>
-      </div>
-
-      <div class="profile-layout">
-        <div class="intro">
-          <p class="lead">
-            I am a PhD student in cryptography at Universität der Bundeswehr München. My research focuses on privacy-preserving and post-quantum cryptography, particularly blind signatures and anonymous credentials. I am also interested in MPC-in-the-Head techniques.
+  <main id="main">
+    <!-- Hero / About -->
+    <section class="hero" id="about" aria-labelledby="about-title">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">PhD student in cryptography</p>
+          <h1 id="about-title">Alan <em>Pulval-Dady</em></h1>
+          <p class="hero-role">Research Institute CODE · Universität der Bundeswehr München</p>
+          <p class="hero-lead">
+            I work on privacy-enhancing cryptographic protocols and post-quantum
+            cryptography, particularly anonymous credentials, blind signatures, and
+            MPC-in-the-Head proof techniques. I am a PhD student at the Research Institute
+            CODE, Universität der Bundeswehr München, supervised by Mark Manulis and
+            Daniel Slamanig.
           </p>
 
-          <div class="link-row" aria-label="Profile links">
-            <a href="mailto:alan.pulval-dady@unibw.de">Email</a>
-            <a href="https://dblp.org/pid/392/7667.html">DBLP</a>
-            <a href="https://www.unibw.de/pacy/team/alan-pulval-dady-m-sc">Profile</a>
-            <a href="https://www.linkedin.com/in/alan-pulval-dady/">LinkedIn</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:alan.pulval-dady@unibw.de">
+              Get in touch
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn-secondary" href="#publications">View publications</a>
           </div>
+
+          <ul class="profile-links" aria-label="Academic profiles">
+            <li><a href="https://dblp.org/pid/392/7667.html" target="_blank" rel="noopener">DBLP <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.unibw.de/pacy/team/alan-pulval-dady-m-sc" target="_blank" rel="noopener">University profile <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.linkedin.com/in/alan-pulval-dady/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <section class="content-block" aria-labelledby="news-heading">
-        <div class="section-heading">
-          <h2 id="news-heading">news</h2>
-          <span>Recent updates</span>
-        </div>
+    <!-- News -->
+    <section class="section" id="news" aria-labelledby="news-heading">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">01</p>
+          <div class="section-head-copy">
+            <p class="kicker">Latest</p>
+            <h2 id="news-heading">News</h2>
+            <p class="section-intro">Papers, talks, and other updates.</p>
+          </div>
+        </header>
 
         <ol id="news-list" class="news-list"></ol>
-      </section>
-    </section>
-
-    <section id="cv" class="panel" role="tabpanel" aria-labelledby="tab-cv" hidden>
-      <div class="page-title">
-        <h1>Curriculum Vitae</h1>
-      </div>
-
-      <div id="cv-sections" class="cv-sections"></div>
-    </section>
-
-    <section id="publications" class="panel" role="tabpanel" aria-labelledby="tab-publications" hidden>
-      <div class="page-title">
-        <h1>Publications</h1>
-      </div>
-
-      <div id="publications-list" class="publication-years"></div>
-
-      <section class="content-block">
-        <h2>Involvement in projects</h2>
-        <ul class="plain-list">
-          <li> <a href="https://dtecbw.de/home/forschung/unibw-m/projekt-lions">LIONS Project</a></li>
-        </ul>
-      </section>
-    </section>
-
-    <section id="seminar" class="panel" role="tabpanel" aria-labelledby="tab-seminar" hidden>
-      <div class="page-title">
-        <h1>CODE Crypto Seminar</h1>
-      </div>
-
-      <div class="seminar-sections">
-        <section class="seminar-section" aria-labelledby="upcoming-talks-heading">
-          <h2 id="upcoming-talks-heading">Upcoming talks</h2>
-          <div id="upcoming-talks" class="talk-list"></div>
-        </section>
-
-        <section class="seminar-section" aria-labelledby="past-talks-heading">
-          <h2 id="past-talks-heading">Past talks</h2>
-          <div id="past-talks" class="talk-list"></div>
-        </section>
       </div>
     </section>
 
-    <section id="teaching" class="panel" role="tabpanel" aria-labelledby="tab-teaching" hidden>
-      <div class="page-title">
-        <h1>Teaching</h1>
-      </div>
+    <!-- Publications -->
+    <section class="section" id="publications" aria-labelledby="publications-heading">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">02</p>
+          <div class="section-head-copy">
+            <p class="kicker">Selected work</p>
+            <h2 id="publications-heading">Publications</h2>
+            <p class="section-intro">Peer-reviewed papers and preprints.</p>
+          </div>
+        </header>
 
-      <div id="teaching-sections" class="teaching-sections"></div>
+        <div id="publications-list" class="publication-years"></div>
+
+        <aside class="project-note">
+          <p class="project-label">Project involvement</p>
+          <p>
+            <a href="https://dtecbw.de/home/forschung/unibw-m/projekt-lions" target="_blank" rel="noopener">LIONS project <span aria-hidden="true">↗</span></a>
+            — research project at Universität der Bundeswehr München.
+          </p>
+        </aside>
+      </div>
     </section>
 
-    <section id="contact" class="panel" role="tabpanel" aria-labelledby="tab-contact" hidden>
-      <div class="page-title">
-        <h1>Contact</h1>
+    <!-- Teaching -->
+    <section class="section" id="teaching" aria-labelledby="teaching-heading">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">03</p>
+          <div class="section-head-copy">
+            <p class="kicker">Teaching</p>
+            <h2 id="teaching-heading">Courses &amp; supervision</h2>
+            <p class="section-intro">Master’s tutorials and thesis supervision at UniBw München.</p>
+          </div>
+        </header>
+
+        <div id="teaching-sections" class="teaching-sections"></div>
       </div>
+    </section>
 
-      <div class="contact-layout">
-        <section class="contact-card">
-          <h2>email</h2>
-          <p><a href="mailto:alan.pulval-dady@unibw.de">alan.pulval-dady@unibw.de</a></p>
-        </section>
+    <!-- Seminar (shown only when talks are available) -->
+    <section class="section" id="seminar" aria-labelledby="seminar-heading" hidden>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">04</p>
+          <div class="section-head-copy">
+            <p class="kicker">Seminar</p>
+            <h2 id="seminar-heading">CODE Crypto Seminar</h2>
+            <p class="section-intro">Upcoming and past talks.</p>
+          </div>
+        </header>
 
-        <section class="contact-card">
-          <h2>profiles</h2>
-          <ul class="plain-list">
-            <li><a href="https://dblp.org/pid/392/7667.html">DBLP</a></li>
-            <li><a href="https://www.unibw.de/pacy/team/alan-pulval-dady-m-sc">University profile</a></li>
-            <li><a href="https://eprint.iacr.org/search?q=Alan+Pulval-Dady">IACR ePrint search</a></li>
-          </ul>
-        </section>
+        <div class="seminar-sections">
+          <section class="seminar-section" aria-labelledby="upcoming-talks-heading">
+            <h3 id="upcoming-talks-heading">Upcoming talks</h3>
+            <div id="upcoming-talks" class="talk-list"></div>
+          </section>
+
+          <section class="seminar-section" aria-labelledby="past-talks-heading">
+            <h3 id="past-talks-heading">Past talks</h3>
+            <div id="past-talks" class="talk-list"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section class="section" id="cv" aria-labelledby="cv-heading">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">04</p>
+          <div class="section-head-copy">
+            <p class="kicker">Background</p>
+            <h2 id="cv-heading">Curriculum Vitae</h2>
+            <p class="section-intro">Education, research experience, and projects.</p>
+          </div>
+        </header>
+
+        <div id="cv-sections" class="cv-sections"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section-contact" id="contact" aria-labelledby="contact-heading">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div class="contact-copy">
+            <p class="kicker kicker-light">Contact</p>
+            <h2 id="contact-heading">Let’s talk cryptography.</h2>
+            <p>
+              For research discussions, collaborations, or student supervision,
+              you can reach me by email.
+            </p>
+            <a class="btn btn-light" href="mailto:alan.pulval-dady@unibw.de">
+              alan.pulval-dady@unibw.de
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="contact-details">
+            <div>
+              <h3>Affiliation</h3>
+              <p>
+                Research Institute CODE<br>
+                Universität der Bundeswehr München<br>
+                Munich, Germany
+              </p>
+            </div>
+            <div>
+              <h3>Elsewhere</h3>
+              <ul>
+                <li><a href="https://dblp.org/pid/392/7667.html" target="_blank" rel="noopener">DBLP <span aria-hidden="true">↗</span></a></li>
+                <li><a href="https://www.unibw.de/pacy/team/alan-pulval-dady-m-sc" target="_blank" rel="noopener">University profile <span aria-hidden="true">↗</span></a></li>
+                <li><a href="https://eprint.iacr.org/search?q=Alan+Pulval-Dady" target="_blank" rel="noopener">IACR ePrint <span aria-hidden="true">↗</span></a></li>
+                <li><a href="https://www.linkedin.com/in/alan-pulval-dady/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2026 Alan Pulval-Dady.</p>
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Alan Pulval-Dady</p>
+      <p><a href="#top">Back to top ↑</a></p>
     </div>
   </footer>
 
-  <script src="news.js?v=2"></script>
-  <script src="publications.js?v=1"></script>
-  <script src="seminar.js?v=1"></script>
-  <script src="cv.js?v=2"></script>
-  <script src="teaching.js?v=1"></script>
-  <script src="script.js?v=7"></script>
+  <script src="news.js?v=3"></script>
+  <script src="publications.js?v=2"></script>
+  <script src="seminar.js?v=2"></script>
+  <script src="cv.js?v=3"></script>
+  <script src="teaching.js?v=3"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
